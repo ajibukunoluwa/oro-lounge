@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -42,14 +43,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function events()
+    public function events(): HasMany
     {
         return $this->hasMany(Event::class, 'organizer_id');
     }
 
-    public function createEvent(array $params)
+    public function orders(): HasMany
     {
+        return $this->hasMany(Order::class);
+    }
 
+    public function createByEmail(array $params)
+    {
         return $this->firstOrCreate([
             'email'  => $params['email'],
         ], [

@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Event;
 use App\Models\User;
+use App\Models\Event;
+use App\Models\Order;
 use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
@@ -15,8 +16,10 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
+        // Create users, with events and orders
         $events = User::factory()
                         ->has(Event::factory()->count(5))
+                        ->has(Order::factory()->count(5))
                         ->count(6)
                         ->create();
 

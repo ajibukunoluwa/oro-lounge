@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->createAdmins();
+        $this->createAdmin();
         // \App\Models\User::factory(10)->create();
 
         $this->call([
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-    public function createAdmins()
+    public function createAdmin()
     {
         \App\Models\User::firstOrCreate([
             'name' => 'Ibukun Ajimoti'
