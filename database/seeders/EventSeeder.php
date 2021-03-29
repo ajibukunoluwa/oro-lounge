@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Catering;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Order;
@@ -20,6 +21,7 @@ class EventSeeder extends Seeder
         $events = User::factory()
                         ->has(Event::factory()->count(5))
                         ->has(Order::factory()->count(5))
+                        ->has(Catering::factory()->count(7))
                         ->count(6)
                         ->create();
 

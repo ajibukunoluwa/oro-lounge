@@ -53,12 +53,24 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function createByEmail(array $params)
+    public function caterings(): HasMany
     {
-        return $this->firstOrCreate([
+        return $this->hasMany(Catering::class);
+    }
+
+    public function createByEmail(array $params): self
+    {
+        $firstName = $params['first_name'] ?? null;
+        $lastName  = $params['last_name'] ?? null;
+
+        $fullName = (empty($firstName) || empty($lastName)) ?
+                        "{$firstName} {$lastName}" :
+                        explode('@', $params['email'])[0];
+
+        return $this->updateOrCreate([
             'email'  => $params['email'],
         ], [
-            'name'  => explode('@', $params['email'])[0],
+            'name'  => $fullName,
             'password'  => Str::random(40),
         ]);
 

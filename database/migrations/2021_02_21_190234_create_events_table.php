@@ -24,9 +24,6 @@ class CreateEventsTable extends Migration
             $table->integer('status')->default(EventStatus::Available);
             $table->timestamps();
 
-
-            // $table->foreign('organizer_id')->references('id')->on('users');
-
             $table->index(['organizer_id', 'start_date', 'end_date', 'status']);
             $table->index(['start_date', 'end_date', 'status']);
         });

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Order;
+use App\Models\Catering;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\StoreCateringRequest;
 
-class OrderController extends Controller
+class CateringController extends Controller
 {
 
-    protected $order;
+    protected $catering;
 
-    public function __construct(Order $order)
+    public function __construct(Catering $catering)
     {
-        $this->order = $order;
+        $this->$catering = $catering;
     }
 
     /**
@@ -23,23 +23,22 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $request)
+    public function store(StoreCateringRequest $request)
     {
         $validated = $request->validated();
 
-
         $user = (new User())->createByEmail([
-            'email'    => $request->email
-        ]);
+                    'email'    => $request->email
+                ]);
 
         unset($validated['email']);
         unset($validated['first_name']);
         unset($validated['last_name']);
 
-        if ( $order = $user->orders()->create($validated) ) {
+        if ( $catering = $user->caterings()->create($validated) ) {
             return sendJson([
-                'order' => $order
-            ], 'Order created', 201);
+                'catering' => $catering
+            ], 'Catering created', 201);
         }
 
         return abortJson();

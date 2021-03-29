@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CateringController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\TestimonialController;
 
@@ -36,6 +37,9 @@ Route::post('/events', [EventController::class, 'store']);
 
 // Orders
 Route::post('/orders', [OrderController::class, 'store']);
+
+// Catering
+Route::post('/catering', [CateringController::class, 'store']);
 
 // Testimonials
 Route::get('/testimonials', [TestimonialController::class, 'index']);
