@@ -63,9 +63,9 @@ class User extends Authenticatable
         $firstName = $params['first_name'] ?? null;
         $lastName  = $params['last_name'] ?? null;
 
-        $fullName = (empty($firstName) || empty($lastName)) ?
-                        "{$firstName} {$lastName}" :
-                        explode('@', $params['email'])[0];
+        $fullName = (empty($firstName) && empty($lastName)) ?
+                        explode('@', $params['email'])[0] :
+                        "{$firstName} {$lastName}";
 
         return $this->updateOrCreate([
             'email'  => $params['email'],

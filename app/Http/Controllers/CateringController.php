@@ -27,9 +27,7 @@ class CateringController extends Controller
     {
         $validated = $request->validated();
 
-        $user = (new User())->createByEmail([
-                    'email'    => $request->email
-                ]);
+        $user = (new User())->createByEmail($validated);
 
         unset($validated['email']);
         unset($validated['first_name']);
