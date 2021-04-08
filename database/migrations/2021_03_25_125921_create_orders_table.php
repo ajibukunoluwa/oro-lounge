@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\Hall;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateOrdersTable extends Migration
 {
@@ -18,7 +19,10 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->char('phone_number', 20);
             $table->integer('number_of_guests')->nullable();
+            $table->string('hall_type')->default(Hall::Small);
             $table->text('comments')->nullable();
+            $table->time('event_time');
+            $table->date('event_date');
             $table->timestamps();
         });
     }
