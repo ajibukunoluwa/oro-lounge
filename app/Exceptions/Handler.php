@@ -43,15 +43,21 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if (($exception instanceof ModelNotFoundException ||
-            $exception instanceof NotFoundHttpException) &&
+        if ($exception instanceof ModelNotFoundException &&
             $request->wantsJson()
         ) {
-            return abortJson([], "Not problem", 404);
+            return abortJson([], "No record found", 404);
         }
 
-        if ($exception instanceof AuthorizationException)
-        {
+        if ($exception instanceof NotFoundHttpException &&
+            $request->wantsJson()
+        ) {
+            return sendJson([], "Url not found", 404);
+        }
+
+        if ($exception instanceof AuthorizationException &&
+            $request->wantsJson()
+        ) {
             return sendJson([], "Unauthorized action", 403);
         }
 
