@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Catering;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\EventComment;
 use App\Models\Order;
 use Illuminate\Database\Seeder;
 
@@ -22,7 +23,8 @@ class EventSeeder extends Seeder
                         ->has(Event::factory()->count(5))
                         ->has(Order::factory()->count(5))
                         ->has(Catering::factory()->count(7))
-                        ->count(6)
+                        ->has(EventComment::factory()->count(7))
+                        ->count(26)
                         ->create();
 
 

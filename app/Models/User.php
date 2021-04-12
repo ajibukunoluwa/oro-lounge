@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->hasMany(Catering::class);
     }
 
+    public function eventComments(): HasMany
+    {
+        return $this->hasMany(EventComment::class);
+    }
+
     public function createByEmail(array $params): self
     {
         $firstName = $params['first_name'] ?? null;
