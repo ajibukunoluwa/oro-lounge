@@ -25,7 +25,8 @@ class TestimonialController extends Controller
     public function index(Request $request)
     {
         $testimonials = $this->testimonial::latest()
-                            ->paginate($request->per_page ?? 5);
+                            ->take($request->per_page ?? 15)
+                            ->get();
 
         return sendJson([
             'testimonials'   => $testimonials

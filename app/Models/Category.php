@@ -14,4 +14,10 @@ class Category extends Model
     {
         return $this->hasMany(Menu::class);
     }
+
+    // All atrributes starts from here
+    public function getIconAttribute($value): string
+    {
+        return url($value);
+    }
 }
